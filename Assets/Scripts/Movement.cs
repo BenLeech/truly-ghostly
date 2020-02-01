@@ -32,7 +32,7 @@ public class Movement : MonoBehaviour {
     IEnumerator DoMoveToPosition(Vector2 position) {
         isMovingToPosition = true;
         float t = 0;
-        float step = (movementSpeed / ((Vector2)gameObject.transform.position - position).magnitude) * Time.fixedDeltaTime;
+        float step = ((movementSpeed / 100) / ((Vector2)gameObject.transform.position - position).magnitude) * Time.fixedDeltaTime;
         while(t <= 1.0f) {
             Vector2 lerpPosition = Vector2.Lerp(gameObject.transform.position, position, t);
             t += step;
