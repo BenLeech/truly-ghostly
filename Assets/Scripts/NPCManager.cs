@@ -7,10 +7,15 @@ public class NPCManager : MonoBehaviour {
     public GameObject theGirlfriendObject;
     private INonPlayableCharacter theGirlfriend;
 
+    public GameObject bradChadObject;
+    private INonPlayableCharacter bradChad;
+
     void Start() {
         theGirlfriend = theGirlfriendObject.GetComponent<TheGirlfriend>();
         StartCoroutine("DoWalkRoute", theGirlfriend);
-        // theGirlfriend.GetMovement().MoveToPosition(theGirlfriend.GetWalkRoute()[0]);
+
+        bradChad = bradChadObject.GetComponent<BradChad>();
+        StartCoroutine("DoWalkRoute", bradChad);
     }
 
     IEnumerator DoWalkRoute(INonPlayableCharacter character) {
