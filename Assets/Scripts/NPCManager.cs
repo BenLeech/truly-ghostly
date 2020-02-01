@@ -19,8 +19,8 @@ public class NPCManager : MonoBehaviour {
             if(!character.GetMovement().GetIsMovingToPosition()) {
                 yield return new WaitForFixedUpdate();
             }
+            
             if(character.GetCurrentPosition() != character.GetWalkRoute()[currentIndex]) {
-                print("Move to position:" + character.GetWalkRoute()[currentIndex]);
                 character.GetMovement().MoveToPosition(character.GetWalkRoute()[currentIndex]);
             } else {
                 currentIndex = currentIndex < character.GetWalkRoute().Length - 1 ? currentIndex + 1 : 0;

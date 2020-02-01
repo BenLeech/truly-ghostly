@@ -12,10 +12,10 @@ public class TheGirlfriend : MonoBehaviour, INonPlayableCharacter {
 
     public Vector2[] GetWalkRoute() {
         return new Vector2[]{
-            new Vector2(-8,-4),
             new Vector2(-8,4),
-            new Vector2(8,4),
-            new Vector2(8,-4)
+            new Vector2(-8,-4),
+            new Vector2(8,-4),
+            new Vector2(8,4)
         };
     }
 
