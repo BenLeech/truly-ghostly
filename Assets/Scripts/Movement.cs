@@ -33,7 +33,8 @@ public class Movement : MonoBehaviour {
         isMovingToPosition = true;
         float t = 0;
         float step = (movementSpeed / ((Vector2)gameObject.transform.position - position).magnitude) * Time.fixedDeltaTime;
-        while(t <= 1.0f) {
+        // TODO: fix this so that t <= 1.0f instead of 0.1f
+        while(t <= 0.1f) {
             Vector2 lerpPosition = Vector2.Lerp(gameObject.transform.position, position, t);
             t += step;
             gameObject.transform.position = lerpPosition;

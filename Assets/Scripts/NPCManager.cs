@@ -10,16 +10,24 @@ public class NPCManager : MonoBehaviour {
     void Start() {
         theGirlfriend = theGirlfriendObject.GetComponent<TheGirlfriend>();
         StartCoroutine("DoWalkRoute", theGirlfriend);
+        // theGirlfriend.GetMovement().MoveToPosition(theGirlfriend.GetWalkRoute()[0]);
     }
 
     IEnumerator DoWalkRoute(INonPlayableCharacter character) {
         int currentIndex = 0;
         while(currentIndex < character.GetWalkRoute().Length) {
-            if(!character.GetMovement().GetIsMovingToPosition() && character.GetCurrentPosition() != character.GetWalkRoute()[currentIndex]) {
+            if(!character.GetMovement().GetIsMovingToPosition()) {
+                yield return new WaitForFixedUpdate();
+            }
+            if(character.GetCurrentPosition() != character.GetWalkRoute()[currentIndex]) {
                 print("Move to position:" + character.GetWalkRoute()[currentIndex]);
                 character.GetMovement().MoveToPosition(character.GetWalkRoute()[currentIndex]);
+            } else {
+                currentIndex = currentIndex < character.GetWalkRoute().Length - 1 ? currentIndex + 1 : 0;
+                print("new current index: " + currentIndex);
             }
-            yield return null;
+
+            yield return new WaitForFixedUpdate();
         }
     }
 }
