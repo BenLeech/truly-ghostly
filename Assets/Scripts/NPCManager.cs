@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class NPCManager : MonoBehaviour {
 
-    public GameObject theGirlfriend;
-
-    private Vector2[] theGirlfriendRoute = new Vector2[]{new Vector2(-300, -300), new Vector2(-300, 300),
-        new Vector2(300, 300), new Vector2(300, -300)};
+    public GameObject theGirlfriendObject;
+    private INonPlayableCharacter theGirlfriend;
 
     void Start() {
-        StartCoroutine("DoWalkRoute");
+        theGirlfriend = theGirlfriendObject.GetComponent<TheGirlfriend>();
+        StartCoroutine("DoWalkRoute", theGirlfriend);
     }
 
-    void Update() {
-        
-    }
-
-    IEnumerator DoWalkRoute(int currentIndex) {
-        yield return null;
+    IEnumerator DoWalkRoute(INonPlayableCharacter character) {
+        int currentIndex = 0;
+        while(currentIndex < character.GetWalkRoute().Length) {
+            if(!character.GetMovement().GetIsMovingToPosition() && character.GetCurrentPosition() != character.GetWalkRoute()[currentIndex]) {
+                print("Move to position:" + character.GetWalkRoute()[currentIndex]);
+                character.GetMovement().MoveToPosition(character.GetWalkRoute()[currentIndex]);
+            }
+            yield return null;
+        }
     }
 }
