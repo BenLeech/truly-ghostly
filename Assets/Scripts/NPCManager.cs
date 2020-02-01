@@ -24,7 +24,6 @@ public class NPCManager : MonoBehaviour {
                 character.GetMovement().MoveToPosition(character.GetWalkRoute()[currentIndex]);
             } else {
                 currentIndex = currentIndex < character.GetWalkRoute().Length - 1 ? currentIndex + 1 : 0;
-                print("new current index: " + currentIndex);
             }
 
             yield return new WaitForFixedUpdate();
