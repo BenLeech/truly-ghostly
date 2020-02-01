@@ -6,24 +6,22 @@ public class Movement : MonoBehaviour {
 
     public float movementSpeed = 1f;
     new private Rigidbody2D rigidbody;
+    private Vector2 velocity = new Vector2();
 
-    // Start is called before the first frame update
     void Start() {
         rigidbody = GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate() {
-        Vector2 veloctiy = new Vector2(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
-        rigidbody.MovePosition(rigidbody.position + veloctiy * Time.fixedDeltaTime * movementSpeed);
+        rigidbody.MovePosition(rigidbody.position + velocity * Time.fixedDeltaTime * movementSpeed);
     }
 
-    void InputControl() {
-        if(Input.GetAxis("vertical") != 0) {
-
-        }
-
-        if(Input.GetAxis("horizontal") != 0) {
-
-        }
+    public void SetMovementVelocity(float x, float y) {
+        velocity = new Vector2(x,y);
     }
+
+    public void MoveToPosition(Vector2 position) {
+
+    }
+
 }
