@@ -28,4 +28,5 @@ public class BradChad : MonoBehaviour, INonPlayableCharacter {
         }
         return movement;
     }
+    
 }
