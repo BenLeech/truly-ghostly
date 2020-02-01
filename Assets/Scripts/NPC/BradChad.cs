@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TheGirlfriend : MonoBehaviour, INonPlayableCharacter {
-
+public class BradChad : MonoBehaviour, INonPlayableCharacter {
     private Movement movement;
 
     void Start() {
@@ -12,10 +11,10 @@ public class TheGirlfriend : MonoBehaviour, INonPlayableCharacter {
 
     public NPCAction[] GetActionQueue() {
         return new NPCAction[]{
-            new NPCAction(new Vector2(-8,4)),
-            new NPCAction(new Vector2(-8,-4)),
-            new NPCAction(new Vector2(8,-4)),
-            new NPCAction(new Vector2(8,4))
+            new NPCAction(new Vector2(3,2), 2),
+            new NPCAction(new Vector2(3,-2), 2),
+            new NPCAction(new Vector2(-3,-2), 2),
+            new NPCAction(new Vector2(-3,2), 2)
         };
     }
 
@@ -29,4 +28,5 @@ public class TheGirlfriend : MonoBehaviour, INonPlayableCharacter {
         }
         return movement;
     }
+    
 }

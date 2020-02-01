@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface INonPlayableCharacter {
-    Vector2[] getWalkRoute();
+
+    NPCAction[] GetActionQueue();
+
+    Vector2 GetCurrentPosition();
+
+    Movement GetMovement();
 
 }

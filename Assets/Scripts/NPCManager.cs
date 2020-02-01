@@ -4,20 +4,35 @@ using UnityEngine;
 
 public class NPCManager : MonoBehaviour {
 
-    public GameObject theGirlfriend;
+    public GameObject theGirlfriendObject;
+    private INonPlayableCharacter theGirlfriend;
 
-    private Vector2[] theGirlfriendRoute = new Vector2[]{new Vector2(-300, -300), new Vector2(-300, 300),
-        new Vector2(300, 300), new Vector2(300, -300)};
+    public GameObject bradChadObject;
+    private INonPlayableCharacter bradChad;
 
     void Start() {
-        StartCoroutine("DoWalkRoute");
+        theGirlfriend = theGirlfriendObject.GetComponent<TheGirlfriend>();
+        StartCoroutine("DoWalkRoute", theGirlfriend);
+
+        bradChad = bradChadObject.GetComponent<BradChad>();
+        StartCoroutine("DoWalkRoute", bradChad);
     }
 
-    void Update() {
-        
-    }
+    IEnumerator DoWalkRoute(INonPlayableCharacter character) {
+        int currentIndex = 0;
+        while(currentIndex < character.GetActionQueue().Length) {
+            if(!character.GetMovement().GetIsMovingToPosition()) {
+                yield return new WaitForFixedUpdate();
+            }
+            
+            if(character.GetCurrentPosition() != character.GetActionQueue()[currentIndex].GetTargetPosition()) {
+                character.GetMovement().MoveToPosition(character.GetActionQueue()[currentIndex].GetTargetPosition());
+            } else {
+                yield return new WaitForSeconds(character.GetActionQueue()[currentIndex].GetTimeDuration());
+                currentIndex = currentIndex < character.GetActionQueue().Length - 1 ? currentIndex + 1 : 0;
+            }
 
-    IEnumerator DoWalkRoute(int currentIndex) {
-        yield return null;
+            yield return new WaitForFixedUpdate();
+        }
     }
 }
