@@ -28,6 +28,7 @@ public class NPCManager : MonoBehaviour {
             if(character.GetCurrentPosition() != character.GetActionQueue()[currentIndex].GetTargetPosition()) {
                 character.GetMovement().MoveToPosition(character.GetActionQueue()[currentIndex].GetTargetPosition());
             } else {
+                yield return new WaitForSeconds(character.GetActionQueue()[currentIndex].GetTimeDuration());
                 currentIndex = currentIndex < character.GetActionQueue().Length - 1 ? currentIndex + 1 : 0;
             }
 

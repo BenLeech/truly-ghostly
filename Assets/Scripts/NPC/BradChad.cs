@@ -11,10 +11,10 @@ public class BradChad : MonoBehaviour, INonPlayableCharacter {
 
     public NPCAction[] GetActionQueue() {
         return new NPCAction[]{
-            new NPCAction(new Vector2(3,2)),
-            new NPCAction(new Vector2(3,-2)),
-            new NPCAction(new Vector2(-3,-2)),
-            new NPCAction(new Vector2(-3,2))
+            new NPCAction(new Vector2(3,2), 2),
+            new NPCAction(new Vector2(3,-2), 2),
+            new NPCAction(new Vector2(-3,-2), 2),
+            new NPCAction(new Vector2(-3,2), 2)
         };
     }
 
