@@ -21,7 +21,18 @@ public class Movement : MonoBehaviour {
     }
 
     public void MoveToPosition(Vector2 position) {
+        StartCoroutine("DoMoveToPosition", position);
+    }
 
+    IEnumerator DoMoveToPosition(Vector2 position) {
+        float t = 0;
+        float step = (movementSpeed / (rigidbody.position - position).magnitude) * Time.fixedDeltaTime;
+        while(t <= 1.0f) {
+            Vector2 lerpPosition = Vector2.Lerp(rigidbody.position, position, t);
+            yield return new WaitForFixedUpdate();
+        }
+        gameObject.transform.position = position;
+        
     }
 
 }
