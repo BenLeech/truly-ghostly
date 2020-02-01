@@ -9,12 +9,12 @@ public class BradChad : MonoBehaviour, INonPlayableCharacter {
         movement = GetComponent<Movement>();
     }
 
-    public Vector2[] GetWalkRoute() {
-        return new Vector2[]{
-            new Vector2(3,2),
-            new Vector2(3,-2),
-            new Vector2(-3,-2),
-            new Vector2(-3,2)
+    public NPCAction[] GetActionQueue() {
+        return new NPCAction[]{
+            new NPCAction(new Vector2(3,2)),
+            new NPCAction(new Vector2(3,-2)),
+            new NPCAction(new Vector2(-3,-2)),
+            new NPCAction(new Vector2(-3,2))
         };
     }
 

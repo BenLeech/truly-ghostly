@@ -10,12 +10,12 @@ public class TheGirlfriend : MonoBehaviour, INonPlayableCharacter {
         movement = GetComponent<Movement>();
     }
 
-    public Vector2[] GetWalkRoute() {
-        return new Vector2[]{
-            new Vector2(-8,4),
-            new Vector2(-8,-4),
-            new Vector2(8,-4),
-            new Vector2(8,4)
+    public NPCAction[] GetActionQueue() {
+        return new NPCAction[]{
+            new NPCAction(new Vector2(-8,4)),
+            new NPCAction(new Vector2(-8,-4)),
+            new NPCAction(new Vector2(8,-4)),
+            new NPCAction(new Vector2(8,4))
         };
     }
 

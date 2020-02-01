@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public interface INonPlayableCharacter {
-    Vector2[] GetWalkRoute();
+
+    NPCAction[] GetActionQueue();
 
     Vector2 GetCurrentPosition();
 

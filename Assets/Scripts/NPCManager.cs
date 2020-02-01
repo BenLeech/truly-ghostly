@@ -20,15 +20,15 @@ public class NPCManager : MonoBehaviour {
 
     IEnumerator DoWalkRoute(INonPlayableCharacter character) {
         int currentIndex = 0;
-        while(currentIndex < character.GetWalkRoute().Length) {
+        while(currentIndex < character.GetActionQueue().Length) {
             if(!character.GetMovement().GetIsMovingToPosition()) {
                 yield return new WaitForFixedUpdate();
             }
             
-            if(character.GetCurrentPosition() != character.GetWalkRoute()[currentIndex]) {
-                character.GetMovement().MoveToPosition(character.GetWalkRoute()[currentIndex]);
+            if(character.GetCurrentPosition() != character.GetActionQueue()[currentIndex].GetTargetPosition()) {
+                character.GetMovement().MoveToPosition(character.GetActionQueue()[currentIndex].GetTargetPosition());
             } else {
-                currentIndex = currentIndex < character.GetWalkRoute().Length - 1 ? currentIndex + 1 : 0;
+                currentIndex = currentIndex < character.GetActionQueue().Length - 1 ? currentIndex + 1 : 0;
             }
 
             yield return new WaitForFixedUpdate();
