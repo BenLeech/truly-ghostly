@@ -57,16 +57,14 @@ public class dialog : MonoBehaviour {
 
     IEnumerator input() {
         while(index < messages.Length -1) {
-            if (currentTextPlayLock) {
-                yield return null;
-            }
-            if (Input.GetKeyDown(KeyCode.Return)) {
+            if (Input.GetKeyDown(KeyCode.Return) && !currentTextPlayLock) {
                 myText.text = "";
                 index++;
                 StartCoroutine(Type());
             } 
             yield return null;
         }
+        StopDialog();
      }
 
      bool ReachedEndOfSentence() {
