@@ -2,6 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum DIRECTION {
+    UP = 0,
+    LEFT = 1,
+    RIGHT = 2,
+    DOWN = 3
+}
+
 public class Movement : MonoBehaviour {
 
     public float movementSpeed = 1f;
@@ -11,8 +18,11 @@ public class Movement : MonoBehaviour {
 
     private DialogManager dialogManager;
 
+    private Animator ani;
+
     public void Awake() {
         dialogManager = GameObject.Find("DialogManager").GetComponent<DialogManager>();
+        ani = GetComponent<Animator>();
     }
 
     void Start() {
@@ -38,6 +48,10 @@ public class Movement : MonoBehaviour {
     IEnumerator DoMoveToPosition(Vector2 position) {
             isMovingToPosition = true;
             float t = 0;
+            if(ani != null) {
+                Debug.Log("set direction: " + determineDirection((Vector2)gameObject.transform.position, position));
+                ani.SetInteger("direction", determineDirection((Vector2)gameObject.transform.position, position));
+            }
             float step = ((movementSpeed / 100) / ((Vector2)gameObject.transform.position - position).magnitude) * Time.fixedDeltaTime;
             while(t <= 1.0f) {
                 if (!dialogManager.isInDialog) {
@@ -51,6 +65,19 @@ public class Movement : MonoBehaviour {
             }
             gameObject.transform.position = position;
             isMovingToPosition = false;
+    }
+
+    private int determineDirection(Vector2 startPos, Vector2 endPos) {
+        if(endPos.x - startPos.x > 0){
+            return 0;
+        } else if(endPos.y - startPos.y > 0) {
+            return 1;
+        } else if(endPos.x - startPos.x < 0) {
+            return 2;
+        } else  {
+            return 3;
+        }
+        
     }
 
 }
