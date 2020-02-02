@@ -11,7 +11,6 @@ public class LiquidRegrets : MonoBehaviour
         dialogManager = GameObject.Find("DialogManager").GetComponent<DialogManager>();
     }
     public void Interact() {
-        Debug.Log("I am drunk");
-        dialogManager.StartIntroDialog();
+        dialogManager.StartWineDialog();
     }
 }

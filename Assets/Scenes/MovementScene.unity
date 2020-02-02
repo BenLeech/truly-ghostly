@@ -1101,7 +1101,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introFile: {fileID: 4900000, guid: 1a0a2c1ecc75e49a9ba7310a6563400d, type: 3}
+  awakeningFile: {fileID: 4900000, guid: ff8668b9c7120aec1afb66694ce99532, type: 3}
+  bradPreAwakeningFile: {fileID: 4900000, guid: b828b210e5d49372f8d1727156e88247,
+    type: 3}
+  bradPostAwakeningFile: {fileID: 4900000, guid: 9219cbdbb03ac234c8a18f0f37567485,
+    type: 3}
+  girlfriendPostAwakeningFile: {fileID: 4900000, guid: 1098a763a03fd8ecb94e18d873865f63,
+    type: 3}
+  wineDialogFile: {fileID: 4900000, guid: f4b04cb5959d92f5980a1986d4e9cb77, type: 3}
+  revelationFile: {fileID: 4900000, guid: 3fcaef45e50cbea588db16a37d9bcfaf, type: 3}
   dialog: {fileID: 205446293}
+  triggeredRevelation: 0
 --- !u!4 &1750977126
 Transform:
   m_ObjectHideFlags: 0
