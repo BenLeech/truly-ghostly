@@ -1109,9 +1109,14 @@ MonoBehaviour:
   girlfriendPostAwakeningFile: {fileID: 4900000, guid: 1098a763a03fd8ecb94e18d873865f63,
     type: 3}
   wineDialogFile: {fileID: 4900000, guid: f4b04cb5959d92f5980a1986d4e9cb77, type: 3}
+  winePreRevelationFile: {fileID: 4900000, guid: 629ec09462c7c2840a9384558a599c0e,
+    type: 3}
+  winePreBradHintFile: {fileID: 4900000, guid: 45dc3fa6c9d5dcb66b5805993ba016db, type: 3}
   revelationFile: {fileID: 4900000, guid: 3fcaef45e50cbea588db16a37d9bcfaf, type: 3}
   dialog: {fileID: 205446293}
+  isInDialog: 0
   triggeredRevelation: 0
+  triggeredBradHint: 0
 --- !u!4 &1750977126
 Transform:
   m_ObjectHideFlags: 0

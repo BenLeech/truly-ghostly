@@ -10,12 +10,15 @@ public class DialogManager : MonoBehaviour {
     public TextAsset bradPostAwakeningFile;
     public TextAsset girlfriendPostAwakeningFile;
     public TextAsset wineDialogFile;
+    public TextAsset winePreRevelationFile;
+    public TextAsset winePreBradHintFile;
     public TextAsset revelationFile;
     public dialog dialog;
 
     public volatile bool isInDialog = false;
 
     public bool triggeredRevelation = false;
+    public bool triggeredBradHint = false;
 
     void Start() {
     }
@@ -39,6 +42,7 @@ public class DialogManager : MonoBehaviour {
     public void StartBradPostAwakeningDialog() {
         isInDialog = true;  
         dialog.StartDialog(readFromJsonFile(bradPostAwakeningFile).messages);
+        triggeredBradHint = true;
     }
     public void StartGirlfriendPostAwakeningDialog() {
         isInDialog = true;
@@ -52,6 +56,16 @@ public class DialogManager : MonoBehaviour {
     public void StartWineDialog() {
         isInDialog = true;
         dialog.StartDialog(readFromJsonFile(wineDialogFile).messages);
+    }
+
+    public void StartWinePreRevelationDialog() {
+        isInDialog = true;
+        dialog.StartDialog(readFromJsonFile(winePreRevelationFile).messages);
+    }
+
+    public void StartWinePreBradHintDialog() {
+        isInDialog = true;
+        dialog.StartDialog(readFromJsonFile(winePreBradHintFile).messages);
     }
 
     public void UnlockDialog() {
