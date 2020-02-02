@@ -8,7 +8,6 @@ public class DialogManager : MonoBehaviour {
     public dialog dialog;
 
     void Start() {
-        StartIntroDialog();
     }
 
     public void StartIntroDialog() {

@@ -26,6 +26,7 @@ public class dialog : MonoBehaviour {
     void Start() {
         myText.color = Color.black;
         myText.text = "";
+        StopDialog();
     }
 
     public void SetMessages(string[] dialogMessages) {
