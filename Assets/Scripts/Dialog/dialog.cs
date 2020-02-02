@@ -8,6 +8,7 @@ using System;
 public class dialog : MonoBehaviour {
 
     public float typingSpeed;
+    public GameObject optionPrefab;
 
     private int index = 0;
     private Text myText;
@@ -17,6 +18,7 @@ public class dialog : MonoBehaviour {
 
     private bool currentTextPlayLock = false;
     private bool messageLock = false;
+    private List<GameObject> dialogOptions = new List<GameObject>();
 
     void Awake() {
         myText = GetComponentInChildren<Text>();
@@ -53,6 +55,21 @@ public class dialog : MonoBehaviour {
         textBackdrop.gameObject.SetActive(false);
         continueBtn.gameObject.SetActive(false);
         messageLock = false;
+    }
+
+    public void StartOptions(DialogOption[] options) {
+        dialogOptions.Clear();
+        for(int i = 0; i < options.Length - 1; i++) {
+            GameObject option = Instantiate(optionPrefab, new Vector2(0, 0), Quaternion.identity);
+            option.transform.SetParent(gameObject.transform);
+            option.transform.position += new Vector3(0,i * 0.1f,0);
+            option.GetComponent<Text>().text = options[i].action;
+            dialogOptions.Add(option);
+        }
+    }
+
+    public void StopOptions() {
+
     }
 
     IEnumerator Type() {

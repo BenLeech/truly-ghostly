@@ -11,6 +11,10 @@ public class DialogManager : MonoBehaviour {
     }
 
     public void StartIntroDialog() {
+        StartDialog(introFile);
+    }
+
+    private void StartDialog(TextAsset jsonFile) {
         dialog.SetMessages(readFromJsonFile(introFile).messages);
         dialog.StartDialog();
     }
