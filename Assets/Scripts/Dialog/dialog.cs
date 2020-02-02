@@ -7,6 +7,7 @@ using System;
 
 public enum DIALOG_STATE {
     DIALOG,
+    TYPING,
     OPTIONS,
     NONE
 }
@@ -23,12 +24,16 @@ public class dialog : MonoBehaviour {
     private UnityEngine.UI.Image textBackdrop;
     private UnityEngine.UI.Image continueBtn;
     
-    private string[] messages;
     private List<GameObject> dialogOptions = new List<GameObject>();
 
-
     private int index = 0;
+    private int optionsIndex = 0;
+    private bool optionSelected = false;
     private DIALOG_STATE currentDialogState = DIALOG_STATE.NONE;
+
+    public static WaitForSeconds wait1Sec = new WaitForSeconds(1);
+    public WaitForSeconds waitTypingSpeed;
+
     void Awake() {
         myText = GetComponentInChildren<Text>();
         textBackdrop = transform.Find("Backdrop").GetComponent<UnityEngine.UI.Image>();
@@ -40,79 +45,128 @@ public class dialog : MonoBehaviour {
     void Start() {
         myText.color = Color.black;
         myText.text = "";
+        waitTypingSpeed = new WaitForSeconds(typingSpeed);
         StopDialog();
     }
 
-    public void StartDialog(string[] dialogMessages) {
+    public void StartDialog(DialogMessage dialogMessage) {
         if(currentDialogState != DIALOG_STATE.NONE) {
             return;
         }
-        messages = dialogMessages;
         StopDialog();
         myText.gameObject.SetActive(true);
         textBackdrop.gameObject.SetActive(true);
-        StartCoroutine(Type());
-        StartCoroutine(input());
         currentDialogState = DIALOG_STATE.DIALOG;
+        StartCoroutine(input(dialogMessage));
     }
 
     public void StopDialog() {
-        StopCoroutine(Type());
-        StopCoroutine(input());
+        StopAllCoroutines();
         myText.gameObject.SetActive(false);
         textBackdrop.gameObject.SetActive(false);
         continueBtn.gameObject.SetActive(false);
+        index = 0;
+        optionsIndex = 0;
+        optionSelected = false;
         currentDialogState = DIALOG_STATE.NONE;
         index = 0;
+        dialogManager.UnlockDialog();
     }
 
     public void StartOptions(DialogOption[] options) {
         dialogOptions.Clear();
-        for(int i = 0; i < options.Length - 1; i++) {
+        continueBtn.gameObject.SetActive(false);
+        for(int i = 0; i < options.Length; i++) {
             GameObject option = Instantiate(optionPrefab, new Vector2(0, 0), Quaternion.identity);
             option.transform.SetParent(gameObject.transform);
-            option.transform.position += new Vector3(0,i * 0.1f,0);
+            option.transform.position = myText.gameObject.transform.position;
+            option.transform.position += new Vector3(0,i * -20,0);
             option.GetComponent<Text>().text = options[i].action;
             dialogOptions.Add(option);
         }
+        optionsIndex = 0;
+        dialogOptions[0].GetComponent<Text>().color = Color.blue;
     }
 
-    void OptionInput() {
-
-    }
-
-    IEnumerator Type() {
-        currentTextPlayLock = true;
+    IEnumerator Type(string[] messages) {
+        currentDialogState = DIALOG_STATE.TYPING;
         continueBtn.gameObject.SetActive(false);
         int i = 0;
         foreach(char letter in messages[index].ToCharArray()) {
             myText.text += letter;
             if (!Input.GetKeyDown(KeyCode.Return) || i < 10) {
-                yield return new WaitForSeconds(typingSpeed);
+                yield return waitTypingSpeed;
+            }
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                index = messages.Length - 1;
+                myText.text = messages[index];
+                yield return wait1Sec;
             }
             i++;
         }
-        currentTextPlayLock = false;
+        currentDialogState = DIALOG_STATE.DIALOG;
         continueBtn.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1);
+        yield return wait1Sec;
     }
 
-    IEnumerator input() {
-        while(index < messages.Length) {
-            if (Input.GetKeyDown(KeyCode.Return) && !currentTextPlayLock) {
+    IEnumerator input(DialogMessage dialogMessage) {
+        StartCoroutine(Type(dialogMessage.messages));
+        while(index < dialogMessage.messages.Length) {
+            TypingInput(dialogMessage.messages);
+            yield return null;
+        }
+        if(dialogMessage.options.Length > 0) {
+            optionSelected = false;
+            currentDialogState = DIALOG_STATE.OPTIONS;
+            StartOptions(dialogMessage.options);
+            while(!optionSelected) {
+                index = 0;
+                if(Input.GetKeyDown(KeyCode.UpArrow)) {
+                    dialogOptions[optionsIndex].GetComponent<Text>().color = Color.black;
+                    optionsIndex = optionsIndex <= 0 ? dialogMessage.options.Length - 1 : optionsIndex - 1;
+                    dialogOptions[optionsIndex].GetComponent<Text>().color = Color.blue;
+                } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+                    dialogOptions[optionsIndex].GetComponent<Text>().color = Color.black;
+                    optionsIndex = optionsIndex >= dialogMessage.options.Length - 1 ? 0 : optionsIndex + 1;
+                    dialogOptions[optionsIndex].GetComponent<Text>().color = Color.blue;
+                } else if (Input.GetKeyDown(KeyCode.Return)) {
+                    optionSelected = true;
+                    dialogManager.HandleDialogEvent(dialogMessage.options[optionsIndex].dialogEvent);
+                    foreach(GameObject dialogOption in dialogOptions) {
+                        Destroy(dialogOption);
+                    }
+
+                    while(index < dialogMessage.options[optionsIndex].messages.Length) {
+                        TypingInput(dialogMessage.options[optionsIndex].messages);
+                        yield return null;
+                    }
+                }
+                yield return null;
+            }
+        }
+        StopDialog();
+    }
+
+    private void TypingInput(string[] messages) {
+        if (currentDialogState != DIALOG_STATE.TYPING && Input.GetKeyDown(KeyCode.Return)) {
                 myText.text = "";
                 index++;
                 if(index < messages.Length ) {
-                    StartCoroutine(Type());
+                    StartCoroutine(Type(messages));
                 }
-                
-            } 
-            yield return null;
-        }
-        StopDialog();
-        dialogManager.SendMessage("UnlockDialog");
+        } 
     }
 
+    private void OptionsInput(DialogOption[] options) {
+        if (currentDialogState != DIALOG_STATE.OPTIONS) {
+            return;
+        }
 
+        if(Input.GetKeyDown(KeyCode.UpArrow)) {
+            optionsIndex = optionsIndex <= 0 ? options.Length - 1 : optionsIndex - 1;
+        } else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+            optionsIndex = optionsIndex >= options.Length - 1 ? 0 : optionsIndex + 1;
+        }
+    }
 
 }
