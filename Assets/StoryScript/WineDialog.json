@@ -3,10 +3,11 @@
 		"Ah, liquid regret. Exactly how I prefer my beverages to taste.",
         "Hmm... Can I still drink this? Lemme give this a shot.",
         "...",
-		"Drat! No body, no stomach, no taste!",
+		"Drat! No body, no stomach, no taste!"
     ],
     "options": [
-        { "action": "1. Smack the glass over!!!", 
+        {   
+            "action": "1. Smack the glass over!!!", 
             "messages": [
                 "*crack*",
                 "Brad: Huh? Did that glass fall over by itself?",
@@ -23,6 +24,5 @@
                 "GAME OVER"
             ]
         }
-        
     ]
 }

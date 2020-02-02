@@ -5,20 +5,29 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using System;
 
+public enum DIALOG_STATE {
+    DIALOG,
+    OPTIONS,
+    NONE
+}
+
 public class dialog : MonoBehaviour {
 
     public float typingSpeed;
     public GameObject optionPrefab;
 
-    private int index = 0;
+    
     private Text myText;
     private UnityEngine.UI.Image textBackdrop;
     private UnityEngine.UI.Image continueBtn;
+    
     private string[] messages;
-
-    private bool currentTextPlayLock = false;
-    private bool messageLock = false;
     private List<GameObject> dialogOptions = new List<GameObject>();
+
+
+    private int index = 0;
+    private bool currentTextPlayLock = false;
+    private DIALOG_STATE currentDialogState = DIALOG_STATE.NONE;
 
     void Awake() {
         myText = GetComponentInChildren<Text>();
@@ -33,7 +42,7 @@ public class dialog : MonoBehaviour {
     }
 
     public void StartDialog(string[] dialogMessages) {
-        if(messageLock) {
+        if(currentDialogState != DIALOG_STATE.NONE) {
             return;
         }
         messages = dialogMessages;
@@ -42,7 +51,7 @@ public class dialog : MonoBehaviour {
         textBackdrop.gameObject.SetActive(true);
         StartCoroutine(Type());
         StartCoroutine(input());
-        messageLock = true;
+        currentDialogState = DIALOG_STATE.DIALOG;
     }
 
     public void StopDialog() {
@@ -51,7 +60,7 @@ public class dialog : MonoBehaviour {
         myText.gameObject.SetActive(false);
         textBackdrop.gameObject.SetActive(false);
         continueBtn.gameObject.SetActive(false);
-        messageLock = false;
+        currentDialogState = DIALOG_STATE.NONE;
     }
 
     public void StartOptions(DialogOption[] options) {
@@ -65,7 +74,7 @@ public class dialog : MonoBehaviour {
         }
     }
 
-    public void StopOptions() {
+    void OptionInput() {
 
     }
 
@@ -94,6 +103,8 @@ public class dialog : MonoBehaviour {
             yield return null;
         }
         StopDialog();
-     }
+    }
+
+
 
 }
