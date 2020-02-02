@@ -17,10 +17,7 @@ public class TheGirlfriend : MonoBehaviour, INonPlayableCharacter {
 
     public NPCAction[] GetActionQueue() {
         return new NPCAction[]{
-            new NPCAction(new Vector2(-8,4)),
-            new NPCAction(new Vector2(-8,-4)),
-            new NPCAction(new Vector2(8,-4)),
-            new NPCAction(new Vector2(8,4))
+            new NPCAction(this.gameObject.transform.position)
         };
     }
 
