@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class BradChad : MonoBehaviour, INonPlayableCharacter {
     private Movement movement;
+    private DialogManager dialogManager;
+
+    public void Awake() {
+        dialogManager = GameObject.Find("DialogManager").GetComponent<DialogManager>();
+    }
 
     void Start() {
         movement = GetComponent<Movement>();
@@ -30,7 +35,11 @@ public class BradChad : MonoBehaviour, INonPlayableCharacter {
     }
 
     public void Interact() {
-        Debug.Log("I am Brad Chad!");
+        if (dialogManager.triggeredRevelation) {
+            dialogManager.StartBradPostAwakeningDialog();
+        } else {
+            dialogManager.StartBradPreAwakeningDialog();
+        }
     }
     
 }

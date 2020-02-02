@@ -1,0 +1,28 @@
+{
+	"messages": [
+		"Ah, liquid regret. Exactly how I prefer my beverages to taste.",
+        "Hmm... Can I still drink this? Lemme give this a shot.",
+        "...",
+		"Drat! No body, no stomach, no taste!",
+    ],
+    "options": [
+        { "action": "1. Smack the glass over!!!", 
+            "messages": [
+                "*crack*",
+                "Brad: Huh? Did that glass fall over by itself?",
+                "Girlfriend: Nooooo! My wine! How will I ever cope with my sadness now?",
+                "Brad: Here, I'll take you out... Don't cry! Drowning your sorrows in alcohol isn't the way.",
+                "Girlfriend: But... my dead fiancee..."
+            ] 
+        },
+        {
+            "action": "2. Leave it alone. ",
+            "messages": [
+                "Nothing happens. Brad and Girlfriend pass each other without a single glance.",
+                "Nothing given, nothing gained. They never saw each other again.",
+                "GAME OVER"
+            ]
+        }
+        
+    ]
+}

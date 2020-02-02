@@ -26,17 +26,13 @@ public class PlayerInteract : MonoBehaviour
         if (TagIsInteractable(other)) {
             currentInterObj = other.gameObject;
             currentObjectType = other.tag;
-            Debug.Log("Is this fire? " + currentObjectType);
         }
     }
 
     private void OnTriggerExit2D(Collider2D other) {
 
-            Debug.Log("Exit? " + currentObjectType);
         if (other.CompareTag(currentObjectType)) {
-            Debug.Log("Is the same tag? " + currentObjectType + " and " + other.tag);
             if (other.gameObject == currentInterObj) {
-                Debug.Log("Is the same object? " + currentInterObj + " and " + other.gameObject);
                 currentInterObj = null;
                 currentObjectType = null;
             }
