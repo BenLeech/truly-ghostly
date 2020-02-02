@@ -157,7 +157,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -417,7 +417,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   introFile: {fileID: 4900000, guid: 1a0a2c1ecc75e49a9ba7310a6563400d, type: 3}
+  awakeningFile: {fileID: 0}
+  bradPreAwakeningFile: {fileID: 0}
+  bradPostAwakeningFile: {fileID: 0}
+  girlfriendPostAwakeningFile: {fileID: 0}
+  wineDialogFile: {fileID: 0}
+  winePreRevelationFile: {fileID: 0}
+  winePreBradHintFile: {fileID: 0}
+  revelationFile: {fileID: 0}
+  GoodEndingFile: {fileID: 4900000, guid: 2c174def53150ba3380e6ac857be4d34, type: 3}
+  BadEndingFile: {fileID: 4900000, guid: 106feaa72bf0ddc26b6a39b254f87c3f, type: 3}
   dialog: {fileID: 321784133}
+  isInDialog: 0
+  triggeredRevelation: 0
+  triggeredBradHint: 0
 --- !u!4 &1788140181
 Transform:
   m_ObjectHideFlags: 0

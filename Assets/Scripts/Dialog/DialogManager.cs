@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class DialogManager : MonoBehaviour {
 
@@ -13,6 +15,9 @@ public class DialogManager : MonoBehaviour {
     public TextAsset winePreRevelationFile;
     public TextAsset winePreBradHintFile;
     public TextAsset revelationFile;
+    public TextAsset GoodEndingFile;
+    public TextAsset BadEndingFile;
+
     public dialog dialog;
 
     public volatile bool isInDialog = false;
@@ -24,9 +29,13 @@ public class DialogManager : MonoBehaviour {
         switch(dialogEvent) {
             case "SMACK_WINE":
                 // TODO: wine smack
+                CrossSceneInformation.ending=dialogEvent;
+                SceneManager.LoadScene("EndScene");
                 break;
             case "LEAVE_WINE":
                 // TODO: leave wine
+                CrossSceneInformation.ending=dialogEvent;
+                SceneManager.LoadScene("EndScene");
                 break;
             default:
                 break;
@@ -77,6 +86,16 @@ public class DialogManager : MonoBehaviour {
     public void StartWinePreBradHintDialog() {
         isInDialog = true;
         dialog.StartDialog(readFromJsonFile(winePreBradHintFile));
+    }
+
+    public void StartGoodEndingDialog() {
+        isInDialog = true;
+        dialog.StartDialog(readFromJsonFile(GoodEndingFile));
+    }
+
+    public void StartBadEndingDialog() {
+        isInDialog = true;
+        dialog.StartDialog(readFromJsonFile(BadEndingFile));
     }
 
     public void UnlockDialog() {

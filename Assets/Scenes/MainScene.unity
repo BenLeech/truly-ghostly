@@ -841,6 +841,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1059774929 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8136169572986763544, guid: 6d93fa331bdfa47f8b8d9be744eb744e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2003149980}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1394646031
 GameObject:
   m_ObjectHideFlags: 0
@@ -26307,6 +26313,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1533945751}
     m_Modifications:
+    - target: {fileID: 8136169573568881616, guid: 6d93fa331bdfa47f8b8d9be744eb744e,
+        type: 3}
+      propertyPath: optionPrefab
+      value: 
+      objectReference: {fileID: 1059774929}
     - target: {fileID: 8136169573568881617, guid: 6d93fa331bdfa47f8b8d9be744eb744e,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -26461,6 +26472,8 @@ MonoBehaviour:
     type: 3}
   winePreBradHintFile: {fileID: 4900000, guid: 45dc3fa6c9d5dcb66b5805993ba016db, type: 3}
   revelationFile: {fileID: 4900000, guid: 3fcaef45e50cbea588db16a37d9bcfaf, type: 3}
+  GoodEndingFile: {fileID: 0}
+  BadEndingFile: {fileID: 0}
   dialog: {fileID: 235057207}
   isInDialog: 0
   triggeredRevelation: 0
