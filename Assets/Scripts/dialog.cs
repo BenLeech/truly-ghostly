@@ -7,21 +7,42 @@ using System;
 
 public class dialog : MonoBehaviour {
 
-    public string[] messages;
     public float typingSpeed;
 
-    int index = 0;
-    Text myText;
+    private int index = 0;
+    private Text myText;
+    private UnityEngine.UI.Image textBackdrop;
+    private string[] messages;
 
     bool currentTextPlayLock = false;
 
-    void Start() {
+    void Awake() {
         myText = GetComponentInChildren<Text>();
+        textBackdrop = GetComponentInChildren<UnityEngine.UI.Image>();
+    }
+
+    void Start() {
         myText.color = Color.black;
         myText.text = "";
+    }
 
+    public void SetMessages(string[] dialogMessages) {
+        messages = dialogMessages;
+    }
+
+    public void StartDialog() {
+        StopDialog();
+        myText.gameObject.SetActive(true);
+        textBackdrop.gameObject.SetActive(true);
         StartCoroutine(Type());
         StartCoroutine(input());
+    }
+
+    public void StopDialog() {
+        myText.gameObject.SetActive(false);
+        textBackdrop.gameObject.SetActive(false);
+        StopCoroutine(Type());
+        StopCoroutine(input());
     }
 
     IEnumerator Type() {
@@ -36,7 +57,6 @@ public class dialog : MonoBehaviour {
 
     IEnumerator input() {
         while(index < messages.Length -1) {
-            Debug.Log("Current text play lock: " + currentTextPlayLock.ToString());
             if (currentTextPlayLock) {
                 yield return null;
             }
