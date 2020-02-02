@@ -97,6 +97,11 @@ public class dialog : MonoBehaviour {
             if (!Input.GetKeyDown(KeyCode.Return) || i < 10) {
                 yield return waitTypingSpeed;
             }
+            if (Input.GetKeyDown(KeyCode.Escape)) {
+                index = messages.Length - 1;
+                myText.text = messages[index];
+                yield return wait1Sec;
+            }
             i++;
         }
         currentDialogState = DIALOG_STATE.DIALOG;
