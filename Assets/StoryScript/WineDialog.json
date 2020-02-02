@@ -6,7 +6,8 @@
 		"Drat! No body, no stomach, no taste!"
     ],
     "options": [
-        { "action": "1. Smack the glass over!!!", 
+        {   
+            "action": "1. Smack the glass over!!!", 
             "messages": [
                 "*smash*",
                 "Brad: Huh? Did that glass fall over by itself?",
@@ -25,6 +26,5 @@
                 "Little did I know that my inaction would cause them to never see each other again."
             ]
         }
-        
     ]
 }

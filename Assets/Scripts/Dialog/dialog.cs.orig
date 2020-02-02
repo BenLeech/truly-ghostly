@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,21 +14,29 @@ public enum DIALOG_STATE {
 public class dialog : MonoBehaviour {
 
     public float typingSpeed;
+<<<<<<< HEAD
     public bool currentTextPlayLock = false;
-
+=======
     public GameObject optionPrefab;
-    private DialogManager dialogManager;
+>>>>>>> dialog-fixes
+
     
     private Text myText;
     private UnityEngine.UI.Image textBackdrop;
     private UnityEngine.UI.Image continueBtn;
     
     private string[] messages;
+<<<<<<< HEAD
+    private DialogManager dialogManager;
+=======
     private List<GameObject> dialogOptions = new List<GameObject>();
 
 
     private int index = 0;
+    private bool currentTextPlayLock = false;
     private DIALOG_STATE currentDialogState = DIALOG_STATE.NONE;
+>>>>>>> dialog-fixes
+
     void Awake() {
         myText = GetComponentInChildren<Text>();
         textBackdrop = transform.Find("Backdrop").GetComponent<UnityEngine.UI.Image>();
@@ -105,9 +113,13 @@ public class dialog : MonoBehaviour {
             yield return null;
         }
         StopDialog();
+<<<<<<< HEAD
         dialogManager.SendMessage("UnlockDialog");
+     }
+=======
     }
 
+>>>>>>> dialog-fixes
 
 
 }
