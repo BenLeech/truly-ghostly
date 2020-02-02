@@ -29,4 +29,8 @@ public class TheGirlfriend : MonoBehaviour, INonPlayableCharacter {
         }
         return movement;
     }
+
+    public void Interact() {
+        Debug.Log("I am Girlfriend!");
+    }
 }

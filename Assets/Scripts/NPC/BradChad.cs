@@ -28,5 +28,9 @@ public class BradChad : MonoBehaviour, INonPlayableCharacter {
         }
         return movement;
     }
+
+    public void Interact() {
+        Debug.Log("I am Brad Chad!");
+    }
     
 }
