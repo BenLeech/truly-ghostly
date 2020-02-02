@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,8 +15,10 @@ public enum DIALOG_STATE {
 public class dialog : MonoBehaviour {
 
     public float typingSpeed;
-    public GameObject optionPrefab;
+    public bool currentTextPlayLock = false;
 
+    public GameObject optionPrefab;
+    private DialogManager dialogManager;
     
     private Text myText;
     private UnityEngine.UI.Image textBackdrop;
@@ -28,11 +30,12 @@ public class dialog : MonoBehaviour {
     private int optionsIndex = 0;
     private bool optionSelected = false;
     private DIALOG_STATE currentDialogState = DIALOG_STATE.NONE;
-
     void Awake() {
         myText = GetComponentInChildren<Text>();
         textBackdrop = transform.Find("Backdrop").GetComponent<UnityEngine.UI.Image>();
         continueBtn = transform.Find("ContinueBtn").GetComponent<UnityEngine.UI.Image>();
+
+        dialogManager = GameObject.Find("DialogManager").GetComponent<DialogManager>();
     }
 
     void Start() {
@@ -61,6 +64,7 @@ public class dialog : MonoBehaviour {
         optionsIndex = 0;
         optionSelected = false;
         currentDialogState = DIALOG_STATE.NONE;
+        index = 0;
     }
 
     public void StartOptions(DialogOption[] options) {
@@ -81,9 +85,13 @@ public class dialog : MonoBehaviour {
     IEnumerator Type(string[] messages) {
         currentDialogState = DIALOG_STATE.TYPING;
         continueBtn.gameObject.SetActive(false);
+        int i = 0;
         foreach(char letter in messages[index].ToCharArray()) {
             myText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
+            if (!Input.GetKeyDown(KeyCode.Return) || i < 10) {
+                yield return new WaitForSeconds(typingSpeed);
+            }
+            i++;
         }
         currentDialogState = DIALOG_STATE.DIALOG;
         continueBtn.gameObject.SetActive(true);

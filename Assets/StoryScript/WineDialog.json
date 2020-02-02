@@ -1,27 +1,28 @@
 {
 	"messages": [
-		"Ah, liquid regret. Exactly how I prefer my beverages to taste.",
-        "Hmm... Can I still drink this? Lemme give this a shot.",
-        "...",
-		"Drat! No body, no stomach, no taste!"
+		"(Nina's glass, still temporarily free from her clutches.)",
+        "(Wonder if there' anything I can do. If I can't interact with people, how about objects...?)",
+        "(...)"
     ],
     "options": [
         {   
             "action": "1. Smack the glass over!!!", 
             "messages": [
-                "*crack*",
+                "*smash*",
                 "Brad: Huh? Did that glass fall over by itself?",
-                "Girlfriend: Nooooo! My wine! How will I ever cope with my sadness now?",
-                "Brad: Here, I'll take you out... Don't cry! Drowning your sorrows in alcohol isn't the way.",
-                "Girlfriend: But... my dead fiancee..."
+                "Nina: Nooooo! My only escape from reality! How will I find the strength to go on?",
+                "Brad: Sorry, I couldn't help but overhear.",
+                "Nina: Brad? What are you doing here?",
+                "Brad: Drowning your sorrows in alcohol isn't a very good coping mechanism. I don't think your Alan would want to see you like this.",
+                "Nina: But...",
+                "Brad: C'mon. Staying here isn't helping anyone. Let's go somewhere else."
             ] 
         },
         {
             "action": "2. Leave it alone. ",
             "messages": [
-                "Nothing happens. Brad and Girlfriend pass each other without a single glance.",
-                "Nothing given, nothing gained. They never saw each other again.",
-                "GAME OVER"
+                "Nothing happens. Brad and Nina pass each other without a single glance.",
+                "Little did I know that my inaction would cause them to never see each other again."
             ]
         }
     ]

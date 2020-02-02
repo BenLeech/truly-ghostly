@@ -11,6 +11,13 @@ public class LiquidRegrets : MonoBehaviour
         dialogManager = GameObject.Find("DialogManager").GetComponent<DialogManager>();
     }
     public void Interact() {
-        dialogManager.StartWineDialog();
+        if (!dialogManager.triggeredRevelation) {
+            dialogManager.StartWinePreRevelationDialog();
+        } else if (!dialogManager.triggeredBradHint) {
+            dialogManager.StartWinePreBradHintDialog();
+        } else {
+            dialogManager.StartWineDialog();
+        }
+            
     }
 }
