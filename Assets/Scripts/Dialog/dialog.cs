@@ -30,6 +30,10 @@ public class dialog : MonoBehaviour {
     private int optionsIndex = 0;
     private bool optionSelected = false;
     private DIALOG_STATE currentDialogState = DIALOG_STATE.NONE;
+
+    public static WaitForSeconds wait1Sec = new WaitForSeconds(1);
+    public WaitForSeconds waitTypingSpeed;
+
     void Awake() {
         myText = GetComponentInChildren<Text>();
         textBackdrop = transform.Find("Backdrop").GetComponent<UnityEngine.UI.Image>();
@@ -41,6 +45,7 @@ public class dialog : MonoBehaviour {
     void Start() {
         myText.color = Color.black;
         myText.text = "";
+        waitTypingSpeed = new WaitForSeconds(typingSpeed);
         StopDialog();
     }
 
@@ -90,13 +95,13 @@ public class dialog : MonoBehaviour {
         foreach(char letter in messages[index].ToCharArray()) {
             myText.text += letter;
             if (!Input.GetKeyDown(KeyCode.Return) || i < 10) {
-                yield return new WaitForSeconds(typingSpeed);
+                yield return waitTypingSpeed;
             }
             i++;
         }
         currentDialogState = DIALOG_STATE.DIALOG;
         continueBtn.gameObject.SetActive(true);
-        yield return new WaitForSeconds(1);
+        yield return wait1Sec;
     }
 
     IEnumerator input(DialogMessage dialogMessage) {
