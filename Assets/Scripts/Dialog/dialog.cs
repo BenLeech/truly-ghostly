@@ -65,6 +65,7 @@ public class dialog : MonoBehaviour {
         optionSelected = false;
         currentDialogState = DIALOG_STATE.NONE;
         index = 0;
+        dialogManager.UnlockDialog();
     }
 
     public void StartOptions(DialogOption[] options) {

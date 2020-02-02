@@ -7,7 +7,11 @@ public class PlayerInput : MonoBehaviour {
     private GameObject player;
     private Movement movement;
 
-    void Start() {
+    private DialogManager dialogManager;
+
+    void Awake() {
+        dialogManager = GameObject.Find("DialogManager").GetComponent<DialogManager>();
+
         player = GameObject.Find("Player");
         if(player == null) {
             throw new MissingReferenceException("Player object not found");
@@ -21,6 +25,8 @@ public class PlayerInput : MonoBehaviour {
     }
 
     void Update() {
-        movement.SetMovementVelocity(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
+        if(!dialogManager.isInDialog) {
+            movement.SetMovementVelocity(Input.GetAxis("Horizontal"),Input.GetAxis("Vertical"));
+        }
     }
 }

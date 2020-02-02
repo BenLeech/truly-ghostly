@@ -29,6 +29,7 @@ public class DialogManager : MonoBehaviour {
     }
 
     private void StartDialog(TextAsset jsonFile) {
+        isInDialog = true;
         dialog.StartDialog(readFromJsonFile(introFile));
     }
     public void StartAwakeningDialog() {
@@ -60,12 +61,12 @@ public class DialogManager : MonoBehaviour {
 
     public void StartWinePreRevelationDialog() {
         isInDialog = true;
-        dialog.StartDialog(readFromJsonFile(winePreRevelationFile).messages);
+        dialog.StartDialog(readFromJsonFile(winePreRevelationFile));
     }
 
     public void StartWinePreBradHintDialog() {
         isInDialog = true;
-        dialog.StartDialog(readFromJsonFile(winePreBradHintFile).messages);
+        dialog.StartDialog(readFromJsonFile(winePreBradHintFile));
     }
 
     public void UnlockDialog() {
