@@ -84,9 +84,13 @@ public class dialog : MonoBehaviour {
     IEnumerator Type() {
         currentTextPlayLock = true;
         continueBtn.gameObject.SetActive(false);
+        int i = 0;
         foreach(char letter in messages[index].ToCharArray()) {
             myText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
+            if (!Input.GetKeyDown(KeyCode.Return) || i < 10) {
+                yield return new WaitForSeconds(typingSpeed);
+            }
+            i++;
         }
         currentTextPlayLock = false;
         continueBtn.gameObject.SetActive(true);
