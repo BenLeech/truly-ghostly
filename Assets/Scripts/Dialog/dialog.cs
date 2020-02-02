@@ -121,6 +121,7 @@ public class dialog : MonoBehaviour {
                     dialogOptions[optionsIndex].GetComponent<Text>().color = Color.blue;
                 } else if (Input.GetKeyDown(KeyCode.Return)) {
                     optionSelected = true;
+                    dialogManager.HandleDialogEvent(dialogMessage.options[optionsIndex].dialogEvent);
                     foreach(GameObject dialogOption in dialogOptions) {
                         Destroy(dialogOption);
                     }

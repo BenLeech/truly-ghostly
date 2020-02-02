@@ -20,7 +20,17 @@ public class DialogManager : MonoBehaviour {
     public bool triggeredRevelation = false;
     public bool triggeredBradHint = false;
 
-    void Start() {
+    public void HandleDialogEvent(string dialogEvent) {
+        switch(dialogEvent) {
+            case "SMACK_WINE":
+                // TODO: wine smack
+                break;
+            case "LEAVE_WINE":
+                // TODO: leave wine
+                break;
+            default:
+                break;
+        }
     }
 
     public void StartIntroDialog() {
