@@ -32,14 +32,11 @@ public class dialog : MonoBehaviour {
         StopDialog();
     }
 
-    public void SetMessages(string[] dialogMessages) {
-        messages = dialogMessages;
-    }
-
-    public void StartDialog() {
+    public void StartDialog(string[] dialogMessages) {
         if(messageLock) {
             return;
         }
+        messages = dialogMessages;
         StopDialog();
         myText.gameObject.SetActive(true);
         textBackdrop.gameObject.SetActive(true);
@@ -97,10 +94,6 @@ public class dialog : MonoBehaviour {
             yield return null;
         }
         StopDialog();
-     }
-
-     bool ReachedEndOfSentence() {
-         return myText.text == messages[index];
      }
 
 }
