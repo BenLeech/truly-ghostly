@@ -12,13 +12,15 @@ public class dialog : MonoBehaviour {
     private int index = 0;
     private Text myText;
     private UnityEngine.UI.Image textBackdrop;
+    private UnityEngine.UI.Image continueBtn;
     private string[] messages;
 
     bool currentTextPlayLock = false;
 
     void Awake() {
         myText = GetComponentInChildren<Text>();
-        textBackdrop = GetComponentInChildren<UnityEngine.UI.Image>();
+        textBackdrop = transform.Find("Backdrop").GetComponent<UnityEngine.UI.Image>();
+        continueBtn = transform.Find("ContinueBtn").GetComponent<UnityEngine.UI.Image>();
     }
 
     void Start() {
@@ -39,19 +41,22 @@ public class dialog : MonoBehaviour {
     }
 
     public void StopDialog() {
-        myText.gameObject.SetActive(false);
-        textBackdrop.gameObject.SetActive(false);
         StopCoroutine(Type());
         StopCoroutine(input());
+        myText.gameObject.SetActive(false);
+        textBackdrop.gameObject.SetActive(false);
+        continueBtn.gameObject.SetActive(false);
     }
 
     IEnumerator Type() {
         currentTextPlayLock = true;
+        continueBtn.gameObject.SetActive(false);
         foreach(char letter in messages[index].ToCharArray()) {
             myText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
         currentTextPlayLock = false;
+        continueBtn.gameObject.SetActive(true);
         yield return new WaitForSeconds(1);
     }
 
