@@ -50,6 +50,7 @@ public class dialog : MonoBehaviour {
     }
 
     public void StartDialog(DialogMessage dialogMessage) {
+        Debug.Log("Starting dialog");
         if(currentDialogState != DIALOG_STATE.NONE) {
             return;
         }

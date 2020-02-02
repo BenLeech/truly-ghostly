@@ -1,6 +1,5 @@
 {
 	"messages": [
-		"Intro:",
 		"Ah... what a beautiful night... ",
 		"The moon is out, no kids playing after sunset...",
 		"A bottle of my favourite grape juice in one hand and my favourite pretzel snack in the other...",
@@ -22,5 +21,14 @@
 		"(Whoah!)",
 		"*falls*",
 		"(Aaaaah!)"
+	],
+	"options": [
+        {   
+            "action": "Open your eyes!", 
+			"dialogEvent": "INTRO",
+            "messages": [
+				"(What in the...)"
+            ]
+		}
 	]
 }

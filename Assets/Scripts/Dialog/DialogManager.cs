@@ -26,6 +26,7 @@ public class DialogManager : MonoBehaviour {
     public bool triggeredBradHint = false;
 
     public void HandleDialogEvent(string dialogEvent) {
+        Debug.Log("Inb4case");
         switch(dialogEvent) {
             case "SMACK_WINE":
                 // TODO: wine smack
@@ -37,19 +38,26 @@ public class DialogManager : MonoBehaviour {
                 CrossSceneInformation.ending=dialogEvent;
                 SceneManager.LoadScene("EndScene");
                 break;
+            case "INTRO": 
+                SceneManager.LoadScene("MainScene");
+                break;
+                
             default:
                 break;
         }
     }
 
     public void StartIntroDialog() {
+        Debug.Log("In the intro dialog");
         isInDialog = true;
         StartDialog(introFile);
     }
 
     private void StartDialog(TextAsset jsonFile) {
+        Debug.Log("In the OTHER intro dialog");
         isInDialog = true;
         dialog.StartDialog(readFromJsonFile(introFile));
+        Debug.Log("After the OTHER one");
     }
     public void StartAwakeningDialog() {
         isInDialog = true;
