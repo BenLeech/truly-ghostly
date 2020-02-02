@@ -7,6 +7,7 @@
     "options": [
         {   
             "action": "1. Smack the glass over!!!", 
+            "dialogEvent": "SMACK_WINE",
             "messages": [
                 "*smash*",
                 "Brad: Huh? Did that glass fall over by itself?",
@@ -20,6 +21,7 @@
         },
         {
             "action": "2. Leave it alone. ",
+            "dialogEvent": "LEAVE_WINE",
             "messages": [
                 "Nothing happens. Brad and Nina pass each other without a single glance.",
                 "Little did I know that my inaction would cause them to never see each other again."

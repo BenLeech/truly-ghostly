@@ -20,7 +20,17 @@ public class DialogManager : MonoBehaviour {
     public bool triggeredRevelation = false;
     public bool triggeredBradHint = false;
 
-    void Start() {
+    public void HandleDialogEvent(string dialogEvent) {
+        switch(dialogEvent) {
+            case "SMACK_WINE":
+                // TODO: wine smack
+                break;
+            case "LEAVE_WINE":
+                // TODO: leave wine
+                break;
+            default:
+                break;
+        }
     }
 
     public void StartIntroDialog() {
@@ -29,43 +39,44 @@ public class DialogManager : MonoBehaviour {
     }
 
     private void StartDialog(TextAsset jsonFile) {
-        dialog.StartDialog(readFromJsonFile(introFile).messages);
+        isInDialog = true;
+        dialog.StartDialog(readFromJsonFile(introFile));
     }
     public void StartAwakeningDialog() {
         isInDialog = true;
-        dialog.StartDialog(readFromJsonFile(awakeningFile).messages);
+        dialog.StartDialog(readFromJsonFile(awakeningFile));
     }
     public void StartBradPreAwakeningDialog() {
         isInDialog = true;
-        dialog.StartDialog(readFromJsonFile(bradPreAwakeningFile).messages);
+        dialog.StartDialog(readFromJsonFile(bradPreAwakeningFile));
     }
     public void StartBradPostAwakeningDialog() {
         isInDialog = true;  
-        dialog.StartDialog(readFromJsonFile(bradPostAwakeningFile).messages);
+        dialog.StartDialog(readFromJsonFile(bradPostAwakeningFile));
         triggeredBradHint = true;
     }
     public void StartGirlfriendPostAwakeningDialog() {
         isInDialog = true;
-        dialog.StartDialog(readFromJsonFile(girlfriendPostAwakeningFile).messages);
+        dialog.StartDialog(readFromJsonFile(girlfriendPostAwakeningFile));
     }
     public void StartRevelationDialog() {
         isInDialog = true;
-        dialog.StartDialog(readFromJsonFile(revelationFile).messages);
+        dialog.StartDialog(readFromJsonFile(revelationFile));
         triggeredRevelation = true;
     }
     public void StartWineDialog() {
         isInDialog = true;
-        dialog.StartDialog(readFromJsonFile(wineDialogFile).messages);
+        dialog.StartDialog(readFromJsonFile(wineDialogFile));
     }
 
     public void StartWinePreRevelationDialog() {
         isInDialog = true;
-        dialog.StartDialog(readFromJsonFile(winePreRevelationFile).messages);
+        dialog.StartDialog(readFromJsonFile(winePreRevelationFile));
     }
 
     public void StartWinePreBradHintDialog() {
         isInDialog = true;
-        dialog.StartDialog(readFromJsonFile(winePreBradHintFile).messages);
+        dialog.StartDialog(readFromJsonFile(winePreBradHintFile));
     }
 
     public void UnlockDialog() {

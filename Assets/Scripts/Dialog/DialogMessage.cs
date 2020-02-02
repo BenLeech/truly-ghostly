@@ -4,6 +4,6 @@ using UnityEngine;
 
 [System.Serializable]
 public class DialogMessage {
-    public string[] messages;
-    public DialogOption[] options;
+    public string[] messages = new string[0];
+    public DialogOption[] options = new DialogOption[0];
 }
