@@ -23,26 +23,26 @@ public class DialogManager : MonoBehaviour {
     }
 
     private void StartDialog(TextAsset jsonFile) {
-        dialog.StartDialog(readFromJsonFile(introFile).messages);
+        dialog.StartDialog(readFromJsonFile(introFile));
     }
     public void StartAwakeningDialog() {
-        dialog.StartDialog(readFromJsonFile(awakeningFile).messages);
+        dialog.StartDialog(readFromJsonFile(awakeningFile));
     }
     public void StartBradPreAwakeningDialog() {
-        dialog.StartDialog(readFromJsonFile(bradPreAwakeningFile).messages);
+        dialog.StartDialog(readFromJsonFile(bradPreAwakeningFile));
     }
     public void StartBradPostAwakeningDialog() {
-        dialog.StartDialog(readFromJsonFile(bradPostAwakeningFile).messages);
+        dialog.StartDialog(readFromJsonFile(bradPostAwakeningFile));
     }
     public void StartGirlfriendPostAwakeningDialog() {
-        dialog.StartDialog(readFromJsonFile(girlfriendPostAwakeningFile).messages);
+        dialog.StartDialog(readFromJsonFile(girlfriendPostAwakeningFile));
     }
     public void StartRevelationDialog() {
-        dialog.StartDialog(readFromJsonFile(revelationFile).messages);
+        dialog.StartDialog(readFromJsonFile(revelationFile));
         triggeredRevelation = true;
     }
     public void StartWineDialog() {
-        dialog.StartDialog(readFromJsonFile(wineDialogFile).messages);
+        dialog.StartDialog(readFromJsonFile(wineDialogFile));
     }
 
     private DialogMessage readFromJsonFile(TextAsset jsonFile) {

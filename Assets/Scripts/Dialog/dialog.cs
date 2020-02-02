@@ -22,9 +22,7 @@ public class dialog : MonoBehaviour {
     private UnityEngine.UI.Image textBackdrop;
     private UnityEngine.UI.Image continueBtn;
     
-    private string[] messages;
     private List<GameObject> dialogOptions = new List<GameObject>();
-
 
     private int index = 0;
     private DIALOG_STATE currentDialogState = DIALOG_STATE.NONE;
@@ -41,22 +39,19 @@ public class dialog : MonoBehaviour {
         StopDialog();
     }
 
-    public void StartDialog(string[] dialogMessages) {
+    public void StartDialog(DialogMessage dialogMessage) {
         if(currentDialogState != DIALOG_STATE.NONE) {
             return;
         }
-        messages = dialogMessages;
         StopDialog();
         myText.gameObject.SetActive(true);
         textBackdrop.gameObject.SetActive(true);
         currentDialogState = DIALOG_STATE.DIALOG;
-        StartCoroutine(Type());
-        StartCoroutine(input());
+        StartCoroutine(input(dialogMessage));
     }
 
     public void StopDialog() {
-        StopCoroutine(Type());
-        StopCoroutine(input());
+        StopAllCoroutines();
         myText.gameObject.SetActive(false);
         textBackdrop.gameObject.SetActive(false);
         continueBtn.gameObject.SetActive(false);
@@ -75,7 +70,7 @@ public class dialog : MonoBehaviour {
         }
     }
 
-    IEnumerator Type() {
+    IEnumerator Type(string[] messages) {
         currentDialogState = DIALOG_STATE.TYPING;
         continueBtn.gameObject.SetActive(false);
         foreach(char letter in messages[index].ToCharArray()) {
@@ -87,13 +82,14 @@ public class dialog : MonoBehaviour {
         yield return new WaitForSeconds(1);
     }
 
-    IEnumerator input() {
-        while(index < messages.Length) {
+    IEnumerator input(DialogMessage dialogMessage) {
+        StartCoroutine(Type(dialogMessage.messages));
+        while(index < dialogMessage.messages.Length) {
             if (currentDialogState != DIALOG_STATE.TYPING && Input.GetKeyDown(KeyCode.Return)) {
                 myText.text = "";
                 index++;
-                if(index < messages.Length ) {
-                    StartCoroutine(Type());
+                if(index < dialogMessage.messages.Length ) {
+                    StartCoroutine(Type(dialogMessage.messages));
                 }
             } 
             yield return null;
