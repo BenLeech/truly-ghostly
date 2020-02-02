@@ -15,7 +15,8 @@ public class dialog : MonoBehaviour {
     private UnityEngine.UI.Image continueBtn;
     private string[] messages;
 
-    bool currentTextPlayLock = false;
+    private bool currentTextPlayLock = false;
+    private bool messageLock = false;
 
     void Awake() {
         myText = GetComponentInChildren<Text>();
@@ -34,11 +35,15 @@ public class dialog : MonoBehaviour {
     }
 
     public void StartDialog() {
+        if(messageLock) {
+            return;
+        }
         StopDialog();
         myText.gameObject.SetActive(true);
         textBackdrop.gameObject.SetActive(true);
         StartCoroutine(Type());
         StartCoroutine(input());
+        messageLock = true;
     }
 
     public void StopDialog() {
@@ -47,6 +52,7 @@ public class dialog : MonoBehaviour {
         myText.gameObject.SetActive(false);
         textBackdrop.gameObject.SetActive(false);
         continueBtn.gameObject.SetActive(false);
+        messageLock = false;
     }
 
     IEnumerator Type() {
@@ -62,11 +68,14 @@ public class dialog : MonoBehaviour {
     }
 
     IEnumerator input() {
-        while(index < messages.Length -1) {
+        while(index < messages.Length) {
             if (Input.GetKeyDown(KeyCode.Return) && !currentTextPlayLock) {
                 myText.text = "";
                 index++;
-                StartCoroutine(Type());
+                if(index < messages.Length ) {
+                    StartCoroutine(Type());
+                }
+                
             } 
             yield return null;
         }
