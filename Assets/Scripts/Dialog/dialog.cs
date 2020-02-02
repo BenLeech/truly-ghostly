@@ -7,6 +7,7 @@ using System;
 
 public enum DIALOG_STATE {
     DIALOG,
+    TYPING,
     OPTIONS,
     NONE
 }
@@ -26,7 +27,6 @@ public class dialog : MonoBehaviour {
 
 
     private int index = 0;
-    private bool currentTextPlayLock = false;
     private DIALOG_STATE currentDialogState = DIALOG_STATE.NONE;
 
     void Awake() {
@@ -49,9 +49,9 @@ public class dialog : MonoBehaviour {
         StopDialog();
         myText.gameObject.SetActive(true);
         textBackdrop.gameObject.SetActive(true);
+        currentDialogState = DIALOG_STATE.DIALOG;
         StartCoroutine(Type());
         StartCoroutine(input());
-        currentDialogState = DIALOG_STATE.DIALOG;
     }
 
     public void StopDialog() {
@@ -60,6 +60,7 @@ public class dialog : MonoBehaviour {
         myText.gameObject.SetActive(false);
         textBackdrop.gameObject.SetActive(false);
         continueBtn.gameObject.SetActive(false);
+        index = 0;
         currentDialogState = DIALOG_STATE.NONE;
     }
 
@@ -74,37 +75,30 @@ public class dialog : MonoBehaviour {
         }
     }
 
-    void OptionInput() {
-
-    }
-
     IEnumerator Type() {
-        currentTextPlayLock = true;
+        currentDialogState = DIALOG_STATE.TYPING;
         continueBtn.gameObject.SetActive(false);
         foreach(char letter in messages[index].ToCharArray()) {
             myText.text += letter;
             yield return new WaitForSeconds(typingSpeed);
         }
-        currentTextPlayLock = false;
+        currentDialogState = DIALOG_STATE.DIALOG;
         continueBtn.gameObject.SetActive(true);
         yield return new WaitForSeconds(1);
     }
 
     IEnumerator input() {
         while(index < messages.Length) {
-            if (Input.GetKeyDown(KeyCode.Return) && !currentTextPlayLock) {
+            if (currentDialogState != DIALOG_STATE.TYPING && Input.GetKeyDown(KeyCode.Return)) {
                 myText.text = "";
                 index++;
                 if(index < messages.Length ) {
                     StartCoroutine(Type());
                 }
-                
             } 
             yield return null;
         }
         StopDialog();
     }
-
-
 
 }
