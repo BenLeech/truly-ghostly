@@ -63,6 +63,7 @@ public class dialog : MonoBehaviour {
         textBackdrop.gameObject.SetActive(false);
         continueBtn.gameObject.SetActive(false);
         currentDialogState = DIALOG_STATE.NONE;
+        index = 0;
     }
 
     public void StartOptions(DialogOption[] options) {
