@@ -44,6 +44,8 @@ public class Movement : MonoBehaviour {
                     Vector2 lerpPosition = Vector2.Lerp(gameObject.transform.position, position, t);
                     t += step;
                     gameObject.transform.position = lerpPosition;
+                } else {
+                    step = 0;
                 }
                 yield return new WaitForFixedUpdate();
             }
