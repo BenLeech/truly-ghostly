@@ -5,8 +5,6 @@ using System.Linq;
 
 public class PlayerInteract : MonoBehaviour
 {
-
-
     public GameObject currentInterObj = null;
     public string currentObjectType;
 

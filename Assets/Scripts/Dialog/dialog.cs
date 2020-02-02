@@ -8,19 +8,21 @@ using System;
 public class dialog : MonoBehaviour {
 
     public float typingSpeed;
+    public bool currentTextPlayLock = false;
 
     private int index = 0;
     private Text myText;
     private UnityEngine.UI.Image textBackdrop;
     private UnityEngine.UI.Image continueBtn;
     private string[] messages;
-
-    bool currentTextPlayLock = false;
+    private DialogManager dialogManager;
 
     void Awake() {
         myText = GetComponentInChildren<Text>();
         textBackdrop = transform.Find("Backdrop").GetComponent<UnityEngine.UI.Image>();
         continueBtn = transform.Find("ContinueBtn").GetComponent<UnityEngine.UI.Image>();
+
+        dialogManager = GameObject.Find("DialogManager").GetComponent<DialogManager>();
     }
 
     void Start() {
@@ -71,6 +73,7 @@ public class dialog : MonoBehaviour {
             yield return null;
         }
         StopDialog();
+        dialogManager.SendMessage("UnlockDialog");
      }
 
      bool ReachedEndOfSentence() {
