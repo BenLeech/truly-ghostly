@@ -619,6 +619,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3f8531ae9839455690c4d519fb276a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1107588109 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8136169572986763544, guid: 6d93fa331bdfa47f8b8d9be744eb744e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1232896686}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1126791412
 GameObject:
   m_ObjectHideFlags: 0
@@ -800,6 +806,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1885797642}
     m_Modifications:
+    - target: {fileID: 8136169573568881616, guid: 6d93fa331bdfa47f8b8d9be744eb744e,
+        type: 3}
+      propertyPath: optionPrefab
+      value: 
+      objectReference: {fileID: 1107588109}
     - target: {fileID: 8136169573568881617, guid: 6d93fa331bdfa47f8b8d9be744eb744e,
         type: 3}
       propertyPath: m_LocalPosition.x
